@@ -39,10 +39,10 @@
     <span id="esp" class="badge">ESP32: belum diketahui</span>
   </div>
 
-  <p>LED GPIO 16: <b id="s16"></b></p>
-  <button class="btn" id="b16" onclick="toggle('16')"></button>
-  <p>LED GPIO 17: <b id="s17"></b></p>
-  <button class="btn" id="b17" onclick="toggle('17')"></button>
+  <p>LED GPIO 26: <b id="s26"></b></p>
+  <button class="btn" id="b26" onclick="toggle('26')"></button>
+  <p>LED GPIO 27: <b id="s27"></b></p>
+  <button class="btn" id="b27" onclick="toggle('27')"></button>
 
   <h3>Log pesan MQTT</h3>
   <div id="log"></div>
@@ -56,10 +56,10 @@
 </script>
 
 <script>
-const PINS = ["16", "17"];
+const PINS = ["26", "27"];
 let client = null;
 let base = "";
-let st = {"16": null, "17": null};   // null = belum tahu kondisinya
+let st = {"26": null, "27": null};   // null = belum tahu kondisinya
 let espOnline = null;
 
 const el = id => document.getElementById(id);
@@ -102,7 +102,7 @@ function connect() {
   const host = el("host").value.trim();
   const grup = el("grup").value.trim() || "tim5";
   base = "kelas-08A/24/" + grup;
-  st = {"16": null, "17": null};
+  st = {"26": null, "27": null};
   espOnline = null;
   render();
   setConn("Menyambung...", "wait");
@@ -118,8 +118,8 @@ function connect() {
   client.on("connect", () => {
     setConn("Terhubung ke broker", "ok");
     log("sys", "Terhubung ke " + url);
-    const t1 = base + "/led16/status";
-    const t2 = base + "/led17/status";
+    const t1 = base + "/led26/status";
+    const t2 = base + "/led27/status";
     const t3 = base + "/esp32/status";
     client.subscribe([t1, t2, t3], { qos: 1 });
     log("sys", "SUBSCRIBE " + t1);
